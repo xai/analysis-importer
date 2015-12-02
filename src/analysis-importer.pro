@@ -1,4 +1,5 @@
 QT += core
+QT += xml
 QT -= gui
 
 TARGET = analysis-importer
@@ -13,10 +14,12 @@ QMAKE_CXXFLAGS_RELEASE += -O3 -march=native -std=c++11
 SOURCES += main.cpp \
     analysisimporter.cpp \
     importer/importer.cpp \
-    importer/xmlimporter.cpp
+    importer/xmlimporter.cpp \
+    importer/myxmlhandler.cpp
 
 HEADERS += \
     analysisimporter.h \
     importer/importer.h \
-    importer/xmlimporter.h
+    importer/xmlimporter.h \
+    importer/myxmlhandler.h
 
