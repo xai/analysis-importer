@@ -41,6 +41,8 @@ void XMLImporter::import(QTextStream *input)
     if (!xmlReader.parse(source)) {
         throw std::runtime_error("Parsing failed.");
     }
+
+    delete handler;
 }
 
 }
