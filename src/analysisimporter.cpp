@@ -1,4 +1,5 @@
 #include "analysisimporter.h"
+#include "config.h"
 #include "importer/xmlimporter.h"
 
 #include <iostream>
@@ -15,7 +16,15 @@ enum CommandLineParseResult
     CommandLineHelpRequested
 };
 
-CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *config, QString *errorMessage) {
+CommandLineParseResult parseCommandLine(QCommandLineParser &parser, Config *config, QString *errorMessage) {
+
+    QCommandLineOption toJsonOption(QStringList() << "j" << "json",
+                                      QCoreApplication::translate("main", "Print JSON."));
+    parser.addOption(toJsonOption);
+
+    QCommandLineOption toDBOption(QStringList() << "d" << "database",
+                                      QCoreApplication::translate("main", "Store into database."));
+    parser.addOption(toDBOption);
 
     // TODO: Add options to configure database connection.
 
@@ -29,6 +38,9 @@ CommandLineParseResult parseCommandLine(QCommandLineParser &parser, QString *con
     } else if (parser.isSet(helpOption)) {
         return CommandLineHelpRequested;
     }
+
+    config->setJSON(parser.isSet(toJsonOption));
+    config->setDB(parser.isSet(toDBOption));
 
     return CommandLineOk;
 }
@@ -44,7 +56,7 @@ int AnalysisImporter::run()
     QCommandLineParser parser;
     parser.setApplicationDescription("Import repository analysis into database.");
 
-    QString config;
+    Config config;
     QString errorMessage;
 
     switch(parseCommandLine(parser, &config, &errorMessage)) {
@@ -64,12 +76,12 @@ int AnalysisImporter::run()
     }
 
 #ifdef QT_DEBUG
-    qDebug() << "Database configuration: " << config;
+    qDebug() << "Configuration:" << qPrintable(config.str());
 #endif
 
     QTextStream in(stdin);
 
-    XMLImporter importer;
+    XMLImporter importer(&config);
     importer.import(&in);
 
     return 0;

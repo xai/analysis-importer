@@ -15,11 +15,13 @@ SOURCES += main.cpp \
     analysisimporter.cpp \
     importer/importer.cpp \
     importer/xmlimporter.cpp \
-    importer/myxmlhandler.cpp
+    importer/xmltojsonhandler.cpp \
+    config.cpp
 
 HEADERS += \
     analysisimporter.h \
     importer/importer.h \
     importer/xmlimporter.h \
-    importer/myxmlhandler.h
+    importer/xmltojsonhandler.h \
+    config.h
 

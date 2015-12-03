@@ -2,9 +2,9 @@
 
 namespace analysisimporter {
 
-Importer::Importer()
+Importer::Importer(Config *config)
 {
-
+    this->config = config;
 }
 
 Importer::~Importer()

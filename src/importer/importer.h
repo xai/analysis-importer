@@ -1,6 +1,7 @@
 #ifndef IMPORTER_H
 #define IMPORTER_H
 
+#include "config.h"
 #include <QTextStream>
 
 namespace analysisimporter {
@@ -8,10 +9,13 @@ namespace analysisimporter {
 class Importer
 {
 public:
-    Importer();
+    Importer(Config *config);
     virtual ~Importer();
 
     virtual void import(QTextStream *input) = 0;
+
+protected:
+    Config *config;
 };
 
 }

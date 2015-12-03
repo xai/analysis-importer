@@ -8,7 +8,7 @@ namespace analysisimporter {
 class XMLImporter : public Importer
 {
 public:
-    XMLImporter();
+    XMLImporter(Config *config);
     virtual ~XMLImporter();
 
     virtual void import(QTextStream *input) override;
