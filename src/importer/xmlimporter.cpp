@@ -43,6 +43,7 @@ void XMLImporter::import(QTextStream *input)
     }
 
     delete handler;
+    delete source;
 }
 
 }
