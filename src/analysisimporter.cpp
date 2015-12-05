@@ -81,8 +81,14 @@ int AnalysisImporter::run()
 
     QTextStream in(stdin);
 
-    XMLImporter importer(&config);
-    importer.import(&in);
+    if (config.isDB() || config.isJSON()) {
+        XMLImporter importer(&config);
+        importer.import(&in);
+    } else {
+        // do nothing, just dump xml
+        QTextStream out(stdout);
+        out << in.readAll();
+    }
 
     return 0;
 }
