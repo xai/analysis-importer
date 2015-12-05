@@ -23,7 +23,7 @@ public:
 
 private:
     int indentation = 0;
-    std::string indent();
+    QString indent();
 };
 
 }

@@ -1,5 +1,5 @@
 #include "xmltojsonhandler.h"
-#include <iostream>
+#include <QTextStream>
 
 namespace analysisimporter {
 
@@ -13,7 +13,7 @@ XmlToJSONHandler::~XmlToJSONHandler()
 
 }
 
-std::string XmlToJSONHandler::indent()
+QString XmlToJSONHandler::indent()
 {
     QString s = "";
 
@@ -21,12 +21,12 @@ std::string XmlToJSONHandler::indent()
         s.append(" ");
     }
 
-    return s.toStdString();
+    return s;
 }
 
 bool XmlToJSONHandler::startDocument()
 {
-    std::cout << "{" << std::endl;
+    QTextStream(stdout) << "{" << endl;
     indentation += 4;
     return true;
 }
@@ -34,26 +34,27 @@ bool XmlToJSONHandler::startDocument()
 bool XmlToJSONHandler::endDocument()
 {
     indentation -= 4;
-    std::cout << "}" << std::endl;
+    QTextStream(stdout) << "}" << endl;
     return true;
 }
 
 bool XmlToJSONHandler::startElement(const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts)
 {
-    std::cout << indent() << "\"" << qPrintable(localName) << "\": {" << std::endl;
+    QTextStream out(stdout);
+    out << indent() << "\"" << localName << "\": {" << endl;
 
     indentation += 4;
 
     for (int i = 0 ; i < atts.length(); i++) {
-        std::cout << indent()
-                  << "\"" << qPrintable(atts.localName(i)) << "\": "
-                  << "\"" << qPrintable(atts.value(i)) << "\"";
+        out << indent()
+            << "\"" << atts.localName(i) << "\": "
+            << "\"" << atts.value(i) << "\"";
 
         if (i != atts.length() - 1) {
-            std::cout << ",";
+            out << ",";
         }
 
-        std::cout << std::endl;
+        out << endl;
     }
 
     return true;
@@ -62,7 +63,7 @@ bool XmlToJSONHandler::startElement(const QString & namespaceURI, const QString 
 bool XmlToJSONHandler::endElement(const QString & namespaceURI, const QString & localName, const QString & qName)
 {
     indentation -= 4;
-    std::cout << indent() << "}," << std::endl;
+    QTextStream(stdout) << indent() << "}," << endl;
 
     return true;
 }
@@ -72,7 +73,7 @@ bool XmlToJSONHandler::characters(const QString &str)
     QString content = str.trimmed();
 
     if (content != "") {
-        std::cout << indent() << "\"Content\": " << "\"" << qPrintable(content) << "\"" << std::endl;
+        QTextStream(stdout) << indent() << "\"Content\": " << "\"" << content << "\"" << endl;
     }
 
     return true;
