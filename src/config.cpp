@@ -15,9 +15,13 @@ Config::~Config()
 QString Config::str()
 {
     QString s;
-    s.append("DBHOST=\"" + dbhost + "\"");
-    s.append("; DBPORT=\"" + dbuser + "\"");
-    s.append("; DBUSER=\"" + dbuser + "\"");
+    if (db) {
+        s.append("DBHOST=\"" + dbhost + "\"");
+        s.append("; DBPORT=\"" + dbuser + "\"");
+        s.append("; DBUSER=\"" + dbuser + "\"");
+    } else {
+        s.append("JSON");
+    }
 
     return s;
 }
