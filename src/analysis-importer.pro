@@ -16,12 +16,16 @@ SOURCES += main.cpp \
     importer/importer.cpp \
     importer/xmlimporter.cpp \
     importer/xmltojsonhandler.cpp \
-    config.cpp
+    config.cpp \
+    data/project.cpp \
+    data/mergescenario.cpp
 
 HEADERS += \
     analysisimporter.h \
     importer/importer.h \
     importer/xmlimporter.h \
     importer/xmltojsonhandler.h \
-    config.h
+    config.h \
+    data/project.h \
+    data/mergescenario.h
 
