@@ -18,7 +18,8 @@ SOURCES += main.cpp \
     importer/xmltojsonhandler.cpp \
     config.cpp \
     data/project.cpp \
-    data/mergescenario.cpp
+    data/mergescenario.cpp \
+    importer/dbschema.cpp
 
 HEADERS += \
     analysisimporter.h \
