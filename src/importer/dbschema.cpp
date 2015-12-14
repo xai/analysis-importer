@@ -8,7 +8,8 @@ const QString DB_CREATE_TABLE_PROJECTS(
         "CREATE TABLE projects ( "
         "  id            INTEGER PRIMARY KEY, "
         "  name          VARCHAR NOT NULL, "
-        "  url           VARCHAR NOT NULL"
+        "  url           VARCHAR NOT NULL, "
+        "  latest        DATETIME"
         ")");
 
 const QString DB_CREATE_TABLE_COMMITS(
@@ -50,5 +51,30 @@ const QString DB_CREATE_TABLE_CONFLICTS(
 const QString DB_CREATE_TABLE_MERGESTATS = "";
 const QString DB_CREATE_TABLE_BUILDSTATS = "";
 const QString DB_CREATE_TABLE_TESTSTATS = "";
+
+/* Statements to manage projects */
+
+const QString DB_FIND_PROJECT_BY_ID(
+        "SELECT id from projects "
+        "WHERE id = :id");
+
+const QString DB_FIND_PROJECT_BY_NAME(
+        "SELECT id from projects "
+        "WHERE name = :name");
+
+const QString DB_FIND_PROJECT_BY_URL(
+        "SELECT id from projects "
+        "WHERE url = :url");
+
+const QString DB_ADD_PROJECT(
+        "INSERT INTO projects (name, url, latest) "
+        "VALUES (:name, :url, :latest)");
+
+const QString DB_UPDATE_PROJECT(
+        "UPDATE projects SET "
+        "  name   = :name, "
+        "  url    = :url, "
+        "  latest = :latest "
+        "WHERE id = :id");
 
 }
