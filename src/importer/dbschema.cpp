@@ -88,7 +88,7 @@ const QString DB_FIND_COMMIT_BY_PROJECT(
         "SELECT id from commits "
         "WHERE project = :project");
 
-const QString DB_FIND_COMMIT_BY_COMMMIT(
+const QString DB_FIND_COMMIT_BY_COMMIT(
         "SELECT id from commits "
         "WHERE commit = :commit");
 
@@ -113,7 +113,7 @@ const QString DB_FIND_MERGESCENARIO_BY_PROJECT(
         "SELECT id from mergescenarios "
         "WHERE project = :project");
 
-const QString DB_FIND_MERGESCENARIO_BY_COMMMIT(
+const QString DB_FIND_MERGESCENARIO_BY_COMMIT(
         "SELECT id from mergescenarios "
         "WHERE mergescenario = :mergescenario");
 
