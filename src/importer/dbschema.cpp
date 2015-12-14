@@ -127,4 +127,14 @@ const QString DB_UPDATE_MERGESCENARIO(
         "  commit    = :commit, "
         "WHERE id = :id");
 
+/* Statements to manage parent commits */
+
+const QString DB_FIND_PARENTCOMMIT_BY_COMMIT(
+        "SELECT id from parentcommits "
+        "WHERE commit = :commit");
+
+const QString DB_ADD_PARENTCOMMIT(
+        "INSERT INTO parentcommits (commit, parent) "
+        "VALUES (:commit, :parent)");
+
 }
