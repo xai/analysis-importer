@@ -103,4 +103,28 @@ const QString DB_UPDATE_COMMIT(
         "  timestamp = :timestamp "
         "WHERE id = :id");
 
+/* Statements to manage mergescenarios */
+
+const QString DB_FIND_MERGESCENARIO_BY_ID(
+        "SELECT id from mergescenarios "
+        "WHERE id = :id");
+
+const QString DB_FIND_MERGESCENARIO_BY_PROJECT(
+        "SELECT id from mergescenarios "
+        "WHERE project = :project");
+
+const QString DB_FIND_MERGESCENARIO_BY_COMMMIT(
+        "SELECT id from mergescenarios "
+        "WHERE mergescenario = :mergescenario");
+
+const QString DB_ADD_MERGESCENARIO(
+        "INSERT INTO mergescenarios (project, commit) "
+        "VALUES (:project, :commit)");
+
+const QString DB_UPDATE_MERGESCENARIO(
+        "UPDATE mergescenarios SET "
+        "  project   = :project, "
+        "  commit    = :commit, "
+        "WHERE id = :id");
+
 }
