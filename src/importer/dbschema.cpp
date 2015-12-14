@@ -16,7 +16,8 @@ const QString DB_CREATE_TABLE_COMMITS(
         "CREATE TABLE commits ( "
         "  id            INTEGER PRIMARY KEY, "
         "  project       INTEGER NOT NULL, "
-        "  commit        VARCHAR NOT NULL"
+        "  commit        VARCHAR NOT NULL, "
+        "  timestamp     DATETIME"
         ")");
 
 const QString DB_CREATE_TABLE_MERGESCENARIOS(
@@ -75,6 +76,31 @@ const QString DB_UPDATE_PROJECT(
         "  name   = :name, "
         "  url    = :url, "
         "  latest = :latest "
+        "WHERE id = :id");
+
+/* Statements to manage commits */
+
+const QString DB_FIND_COMMIT_BY_ID(
+        "SELECT id from commits "
+        "WHERE id = :id");
+
+const QString DB_FIND_COMMIT_BY_PROJECT(
+        "SELECT id from commits "
+        "WHERE project = :project");
+
+const QString DB_FIND_COMMIT_BY_COMMMIT(
+        "SELECT id from commits "
+        "WHERE commit = :commit");
+
+const QString DB_ADD_COMMIT(
+        "INSERT INTO commits (project, commit, timestamp) "
+        "VALUES (:project, :commit, :timestamp)");
+
+const QString DB_UPDATE_COMMIT(
+        "UPDATE commits SET "
+        "  project   = :project, "
+        "  commit    = :commit, "
+        "  timestamp = :timestamp "
         "WHERE id = :id");
 
 }
