@@ -78,6 +78,10 @@ const QString DB_UPDATE_PROJECT(
         "  latest = :latest "
         "WHERE id = :id");
 
+const QString DB_DELETE_PROJECT(
+        "DELETE from projects "
+        "WHERE id = :id");
+
 /* Statements to manage commits */
 
 const QString DB_FIND_COMMIT_BY_ID(
@@ -101,6 +105,10 @@ const QString DB_UPDATE_COMMIT(
         "  project   = :project, "
         "  commit    = :commit, "
         "  timestamp = :timestamp "
+        "WHERE id = :id");
+
+const QString DB_DELETE_COMMIT(
+        "DELETE from commits "
         "WHERE id = :id");
 
 /* Statements to manage mergescenarios */
@@ -127,6 +135,10 @@ const QString DB_UPDATE_MERGESCENARIO(
         "  commit    = :commit "
         "WHERE id = :id");
 
+const QString DB_DELETE_MERGESCENARIO(
+        "DELETE from mergescenario "
+        "WHERE id = :id");
+
 /* Statements to manage parent commits */
 
 const QString DB_FIND_PARENTCOMMIT_BY_ID(
@@ -150,6 +162,10 @@ const QString DB_UPDATE_PARENTCOMMIT(
         "UPDATE parentcommits SET "
         "  commit = :commit, "
         "  parent = :parent "
+        "WHERE id = :id");
+
+const QString DB_DELETE_PARENTCOMMIT(
+        "DELETE from parentcommits "
         "WHERE id = :id");
 
 /* Statements to manage files */
@@ -181,6 +197,10 @@ const QString DB_UPDATE_FILE(
         "  path   = :path "
         "WHERE id = :id");
 
+const QString DB_DELETE_FILE(
+        "DELETE from files "
+        "WHERE id = :id");
+
 /* Statements to manage conflicts */
 
 const QString DB_FIND_CONFLICT_BY_ID(
@@ -208,6 +228,10 @@ const QString DB_UPDATE_CONFLICT(
         "UPDATE mergescenarios SET "
         "  mergescenario = :mergescenario, "
         "  file          = :file "
+        "WHERE id = :id");
+
+const QString DB_DELETE_CONFLICT(
+        "DELETE from conflicts "
         "WHERE id = :id");
 
 }
