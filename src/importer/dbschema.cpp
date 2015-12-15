@@ -124,7 +124,7 @@ const QString DB_ADD_MERGESCENARIO(
 const QString DB_UPDATE_MERGESCENARIO(
         "UPDATE mergescenarios SET "
         "  project   = :project, "
-        "  commit    = :commit, "
+        "  commit    = :commit "
         "WHERE id = :id");
 
 /* Statements to manage parent commits */
@@ -194,8 +194,8 @@ const QString DB_ADD_CONFLICT(
 
 const QString DB_UPDATE_CONFLICT(
         "UPDATE mergescenarios SET "
-        "  mergescenario   = :mergescenario, "
-        "  file    = :file "
+        "  mergescenario = :mergescenario, "
+        "  file          = :file "
         "WHERE id = :id");
 
 }
