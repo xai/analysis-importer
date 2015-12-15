@@ -129,6 +129,10 @@ const QString DB_UPDATE_MERGESCENARIO(
 
 /* Statements to manage parent commits */
 
+const QString DB_FIND_PARENTCOMMIT_BY_ID(
+        "SELECT id from parentcommits "
+        "WHERE id = :id");
+
 const QString DB_FIND_PARENTCOMMIT_BY_COMMIT(
         "SELECT id from parentcommits "
         "WHERE commit = :commit");
