@@ -133,6 +133,11 @@ const QString DB_FIND_PARENTCOMMIT_BY_COMMIT(
         "SELECT id from parentcommits "
         "WHERE commit = :commit");
 
+const QString DB_FIND_PARENTCOMMIT_BY_COMMIT_AND_PARENT(
+        "SELECT id from parentcommits "
+        "WHERE commit = :commit "
+        "AND parent = :parent");
+
 const QString DB_ADD_PARENTCOMMIT(
         "INSERT INTO parentcommits (commit, parent) "
         "VALUES (:commit, :parent)");
