@@ -169,4 +169,33 @@ const QString DB_ADD_FILE(
         "INSERT INTO files (commit, path) "
         "VALUES (:commit, :path)");
 
+/* Statements to manage conflicts */
+
+const QString DB_FIND_CONFLICT_BY_ID(
+        "SELECT id from conflicts "
+        "WHERE id = :id");
+
+const QString DB_FIND_CONFLICT_BY_MERGESCENARIO(
+        "SELECT id from conflicts "
+        "WHERE mergescenario = :mergescenario");
+
+const QString DB_FIND_CONFLICT_BY_FILE(
+        "SELECT id from conflicts "
+        "WHERE file = :file");
+
+const QString DB_FIND_CONFLICT_BY_MERGESCENARIO_AND_FILE(
+        "SELECT id from conflicts "
+        "WHERE mergescenario = :mergescenario "
+        "AND file = :file");
+
+const QString DB_ADD_CONFLICT(
+        "INSERT INTO conflicts (mergescenario, file) "
+        "VALUES (:mergescenario, :file)");
+
+const QString DB_UPDATE_CONFLICT(
+        "UPDATE mergescenarios SET "
+        "  mergescenario   = :mergescenario, "
+        "  file    = :file "
+        "WHERE id = :id");
+
 }
