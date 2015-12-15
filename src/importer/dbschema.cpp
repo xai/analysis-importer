@@ -142,4 +142,27 @@ const QString DB_ADD_PARENTCOMMIT(
         "INSERT INTO parentcommits (commit, parent) "
         "VALUES (:commit, :parent)");
 
+/* Statements to manage files */
+
+const QString DB_FIND_FILE_BY_ID(
+        "SELECT id from files "
+        "WHERE id = :id");
+
+const QString DB_FIND_FILE_BY_COMMIT(
+        "SELECT id from files "
+        "WHERE commit = :commit");
+
+const QString DB_FIND_FILE_BY_PATH(
+        "SELECT id from files "
+        "WHERE path = :path");
+
+const QString DB_FIND_FILE_BY_COMMIT_AND_PATH(
+        "SELECT id from files "
+        "WHERE commit = :commit "
+        "AND path = :path");
+
+const QString DB_ADD_FILE(
+        "INSERT INTO files (commit, path) "
+        "VALUES (:commit, :path)");
+
 }
