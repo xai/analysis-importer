@@ -125,6 +125,11 @@ const QString DB_FIND_MERGESCENARIO_BY_COMMIT(
         "SELECT id from mergescenarios "
         "WHERE commit = :commit");
 
+const QString DB_FIND_MERGESCENARIO_BY_PROJECT_AND_COMMIT(
+        "SELECT id from mergescenarios "
+        "WHERE project = :project "
+        "AND   commit = :commit");
+
 const QString DB_ADD_MERGESCENARIO(
         "INSERT INTO mergescenarios (project, commit) "
         "VALUES (:project, :commit)");
