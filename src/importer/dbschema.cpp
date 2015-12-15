@@ -152,7 +152,7 @@ const QString DB_FIND_PARENTCOMMIT_BY_COMMIT(
 const QString DB_FIND_PARENTCOMMIT_BY_COMMIT_AND_PARENT(
         "SELECT id from parentcommits "
         "WHERE commit = :commit "
-        "AND parent = :parent");
+        "AND   parent = :parent");
 
 const QString DB_ADD_PARENTCOMMIT(
         "INSERT INTO parentcommits (commit, parent) "
@@ -185,7 +185,7 @@ const QString DB_FIND_FILE_BY_PATH(
 const QString DB_FIND_FILE_BY_COMMIT_AND_PATH(
         "SELECT id from files "
         "WHERE commit = :commit "
-        "AND path = :path");
+        "AND   path = :path");
 
 const QString DB_ADD_FILE(
         "INSERT INTO files (commit, path) "
@@ -218,7 +218,7 @@ const QString DB_FIND_CONFLICT_BY_FILE(
 const QString DB_FIND_CONFLICT_BY_MERGESCENARIO_AND_FILE(
         "SELECT id from conflicts "
         "WHERE mergescenario = :mergescenario "
-        "AND file = :file");
+        "AND   file = :file");
 
 const QString DB_ADD_CONFLICT(
         "INSERT INTO conflicts (mergescenario, file) "
