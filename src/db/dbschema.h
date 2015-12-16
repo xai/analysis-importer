@@ -34,11 +34,11 @@ const QString DB_CREATE_TABLE_PROJECTS(
         "  latest        DATETIME"
         ")");
 
-const QString DB_CREATE_TABLE_REVISIONS(
-        "CREATE TABLE revisions ( "
+const QString DB_CREATE_TABLE_COMMITS(
+        "CREATE TABLE commits ( "
         "  id            INTEGER PRIMARY KEY, "
         "  project       INTEGER NOT NULL, "
-        "  revision        VARCHAR NOT NULL, "
+        "  commit        VARCHAR NOT NULL, "
         "  timestamp     DATETIME"
         ")");
 
@@ -46,20 +46,20 @@ const QString DB_CREATE_TABLE_MERGESCENARIOS(
         "CREATE TABLE mergescenarios ( "
         "  id            INTEGER PRIMARY KEY, "
         "  project       INTEGER NOT NULL, "
-        "  revision        INTEGER NOT NULL"
+        "  commit        INTEGER NOT NULL"
         ")");
 
-const QString DB_CREATE_TABLE_PARENTREVISIONS(
-        "CREATE TABLE parentrevisions ( "
+const QString DB_CREATE_TABLE_PARENTCOMMITS(
+        "CREATE TABLE parentcommits ( "
         "  id            INTEGER PRIMARY KEY, "
-        "  revision        INTEGER NOT NULL, "
+        "  commit        INTEGER NOT NULL, "
         "  parent        INTEGER NOT NULL"
         ")");
 
 const QString DB_CREATE_TABLE_FILES(
         "CREATE TABLE files ( "
         "  id            INTEGER PRIMARY KEY, "
-        "  revision        INTEGER NOT NULL, "
+        "  commit        INTEGER NOT NULL, "
         "  path          VARCHAR NOT NULL"
         ")");
 
@@ -104,33 +104,33 @@ const QString DB_DELETE_PROJECT(
         "DELETE from projects "
         "WHERE id = :id");
 
-/* Statements to manage revisions */
+/* Statements to manage commits */
 
-const QString DB_FIND_REVISION_BY_ID(
-        "SELECT id from revisions "
+const QString DB_FIND_COMMIT_BY_ID(
+        "SELECT id from commits "
         "WHERE id = :id");
 
-const QString DB_FIND_REVISION_BY_PROJECT(
-        "SELECT id from revisions "
+const QString DB_FIND_COMMIT_BY_PROJECT(
+        "SELECT id from commits "
         "WHERE project = :project");
 
-const QString DB_FIND_REVISION_BY_REVISION(
-        "SELECT id from revisions "
-        "WHERE revision = :revision");
+const QString DB_FIND_COMMIT_BY_COMMIT(
+        "SELECT id from commits "
+        "WHERE commit = :commit");
 
-const QString DB_ADD_REVISION(
-        "INSERT INTO revisions (project, revision, timestamp) "
-        "VALUES (:project, :revision, :timestamp)");
+const QString DB_ADD_COMMIT(
+        "INSERT INTO commits (project, commit, timestamp) "
+        "VALUES (:project, :commit, :timestamp)");
 
-const QString DB_UPDATE_REVISION(
-        "UPDATE revisions SET "
+const QString DB_UPDATE_COMMIT(
+        "UPDATE commits SET "
         "  project   = :project, "
-        "  revision    = :revision, "
+        "  commit    = :commit, "
         "  timestamp = :timestamp "
         "WHERE id = :id");
 
-const QString DB_DELETE_REVISION(
-        "DELETE from revisions "
+const QString DB_DELETE_COMMIT(
+        "DELETE from commits "
         "WHERE id = :id");
 
 /* Statements to manage mergescenarios */
@@ -143,56 +143,56 @@ const QString DB_FIND_MERGESCENARIO_BY_PROJECT(
         "SELECT id from mergescenarios "
         "WHERE project = :project");
 
-const QString DB_FIND_MERGESCENARIO_BY_REVISION(
+const QString DB_FIND_MERGESCENARIO_BY_COMMIT(
         "SELECT id from mergescenarios "
-        "WHERE revision = :revision");
+        "WHERE commit = :commit");
 
-const QString DB_FIND_MERGESCENARIO_BY_PROJECT_AND_REVISION(
+const QString DB_FIND_MERGESCENARIO_BY_PROJECT_AND_COMMIT(
         "SELECT id from mergescenarios "
         "WHERE project = :project "
-        "AND   revision = :revision");
+        "AND   commit = :commit");
 
 const QString DB_ADD_MERGESCENARIO(
-        "INSERT INTO mergescenarios (project, revision) "
-        "VALUES (:project, :revision)");
+        "INSERT INTO mergescenarios (project, commit) "
+        "VALUES (:project, :commit)");
 
 const QString DB_UPDATE_MERGESCENARIO(
         "UPDATE mergescenarios SET "
         "  project   = :project, "
-        "  revision    = :revision "
+        "  commit    = :commit "
         "WHERE id = :id");
 
 const QString DB_DELETE_MERGESCENARIO(
         "DELETE from mergescenario "
         "WHERE id = :id");
 
-/* Statements to manage parent revisions */
+/* Statements to manage parent commits */
 
-const QString DB_FIND_PARENTREVISION_BY_ID(
-        "SELECT id from parentrevisions "
+const QString DB_FIND_PARENTCOMMIT_BY_ID(
+        "SELECT id from parentcommits "
         "WHERE id = :id");
 
-const QString DB_FIND_PARENTREVISION_BY_REVISION(
-        "SELECT id from parentrevisions "
-        "WHERE revision = :revision");
+const QString DB_FIND_PARENTCOMMIT_BY_COMMIT(
+        "SELECT id from parentcommits "
+        "WHERE commit = :commit");
 
-const QString DB_FIND_PARENTREVISION_BY_REVISION_AND_PARENT(
-        "SELECT id from parentrevisions "
-        "WHERE revision = :revision "
+const QString DB_FIND_PARENTCOMMIT_BY_COMMIT_AND_PARENT(
+        "SELECT id from parentcommits "
+        "WHERE commit = :commit "
         "AND   parent = :parent");
 
-const QString DB_ADD_PARENTREVISION(
-        "INSERT INTO parentrevisions (revision, parent) "
-        "VALUES (:revision, :parent)");
+const QString DB_ADD_PARENTCOMMIT(
+        "INSERT INTO parentcommits (commit, parent) "
+        "VALUES (:commit, :parent)");
 
-const QString DB_UPDATE_PARENTREVISION(
-        "UPDATE parentrevisions SET "
-        "  revision = :revision, "
+const QString DB_UPDATE_PARENTCOMMIT(
+        "UPDATE parentcommits SET "
+        "  commit = :commit, "
         "  parent = :parent "
         "WHERE id = :id");
 
-const QString DB_DELETE_PARENTREVISION(
-        "DELETE from parentrevisions "
+const QString DB_DELETE_PARENTCOMMIT(
+        "DELETE from parentcommits "
         "WHERE id = :id");
 
 /* Statements to manage files */
@@ -201,26 +201,26 @@ const QString DB_FIND_FILE_BY_ID(
         "SELECT id from files "
         "WHERE id = :id");
 
-const QString DB_FIND_FILE_BY_REVISION(
+const QString DB_FIND_FILE_BY_COMMIT(
         "SELECT id from files "
-        "WHERE revision = :revision");
+        "WHERE commit = :commit");
 
 const QString DB_FIND_FILE_BY_PATH(
         "SELECT id from files "
         "WHERE path = :path");
 
-const QString DB_FIND_FILE_BY_REVISION_AND_PATH(
+const QString DB_FIND_FILE_BY_COMMIT_AND_PATH(
         "SELECT id from files "
-        "WHERE revision = :revision "
+        "WHERE commit = :commit "
         "AND   path = :path");
 
 const QString DB_ADD_FILE(
-        "INSERT INTO files (revision, path) "
-        "VALUES (:revision, :path)");
+        "INSERT INTO files (commit, path) "
+        "VALUES (:commit, :path)");
 
 const QString DB_UPDATE_FILE(
-        "UPDATE parentrevisions SET "
-        "  revision = :revision, "
+        "UPDATE parentcommits SET "
+        "  commit = :commit, "
         "  path   = :path "
         "WHERE id = :id");
 

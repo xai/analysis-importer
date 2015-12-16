@@ -127,8 +127,8 @@ QSqlError DBManager::initDb(QSqlDatabase &db)
 
     QQueue<QPair<QString, QString>> queue;
     queue.enqueue(QPair<QString, QString>("projects", DB_CREATE_TABLE_PROJECTS));
-    queue.enqueue(QPair<QString, QString>("revisions", DB_CREATE_TABLE_REVISIONS));
-    queue.enqueue(QPair<QString, QString>("parentrevisions", DB_CREATE_TABLE_PARENTREVISIONS));
+    queue.enqueue(QPair<QString, QString>("commits", DB_CREATE_TABLE_COMMITS));
+    queue.enqueue(QPair<QString, QString>("parentcommits", DB_CREATE_TABLE_PARENTCOMMITS));
     queue.enqueue(QPair<QString, QString>("mergescenarios", DB_CREATE_TABLE_MERGESCENARIOS));
     queue.enqueue(QPair<QString, QString>("files", DB_CREATE_TABLE_FILES));
     queue.enqueue(QPair<QString, QString>("conflicts", DB_CREATE_TABLE_CONFLICTS));
