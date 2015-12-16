@@ -19,13 +19,12 @@
 
 
 #include "xmltodbhandler.h"
+#include <exception>
 
 namespace analysisimporter {
 
 XmlToDBHandler::XmlToDBHandler()
 {
-    dbmanager = new DBManager();
-    dbmanager->connect();
 }
 
 XmlToDBHandler::~XmlToDBHandler()
@@ -35,12 +34,13 @@ XmlToDBHandler::~XmlToDBHandler()
 
 bool XmlToDBHandler::startDocument()
 {
-    return true;
+    dbmanager = new DBManager();
+    return dbmanager->connect();
 }
 
 bool XmlToDBHandler::endDocument()
 {
-    return true;
+    return dbmanager->disconnect();
 }
 
 bool XmlToDBHandler::startElement(const QString & namespaceURI, const QString & localName, const QString & qName, const QXmlAttributes & atts)
