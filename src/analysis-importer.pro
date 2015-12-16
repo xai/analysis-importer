@@ -38,7 +38,9 @@ SOURCES += main.cpp \
     config.cpp \
     data/project.cpp \
     data/mergescenario.cpp \
-    importer/dbschema.cpp
+    db/dbschema.cpp \
+    importer/xmltodbhandler.cpp \
+    db/dbmanager.cpp
 
 HEADERS += \
     analysisimporter.h \
@@ -47,5 +49,7 @@ HEADERS += \
     importer/xmltojsonhandler.h \
     config.h \
     data/project.h \
-    data/mergescenario.h
+    data/mergescenario.h \
+    importer/xmltodbhandler.h \
+    db/dbmanager.h
 

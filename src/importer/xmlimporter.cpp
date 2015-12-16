@@ -19,6 +19,7 @@
 
 #include "xmlimporter.h"
 #include "xmltojsonhandler.h"
+#include "xmltodbhandler.h"
 
 #include <QtDebug>
 #include <QXmlSimpleReader>
@@ -49,7 +50,7 @@ void XMLImporter::import(QTextStream *input)
     if (config->isJSON()) {
         handler = new XmlToJSONHandler;
     } else if (config->isDB()) {
-        throw std::runtime_error("DB Handler not yet implemented.");
+        handler = new XmlToDBHandler;
     } else {
         throw std::runtime_error("No handler found.");
     }

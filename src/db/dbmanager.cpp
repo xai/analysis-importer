@@ -2,48 +2,59 @@
  * Copyright (C) 2015: Olaf Lessenich
  *
  * This file is part of AnalysisImporter.
- * 
+ *
  * AnalysisImporter is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * AnalysisImporter is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with AnalysisImporter.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "project.h"
+
+#include "dbmanager.h"
+#include <QDebug>
 
 namespace analysisimporter {
 
-Project::Project()
+DBManager::DBManager()
 {
 
 }
 
-Project::Project(QString name, QString url) : name(name), url(url)
+DBManager::~DBManager()
 {
-
+    disconnect();
 }
 
-void Project::setName(QString name)
+bool DBManager::connect()
 {
-    this->name = name;
+#ifdef QT_DEBUG
+    qDebug() << "DBManager.connect()";
+#endif
 }
 
-void Project::setUrl(QString url)
+bool DBManager::disconnect()
 {
-    this->url = url;
+#ifdef QT_DEBUG
+    qDebug() << "DBManager.disconnect()";
+#endif
 }
 
-QString Project::print()
+QString DBManager::getDBLocation()
 {
-    return name + " (" + url + ")";
+    return dblocation;
+}
+
+void DBManager::setDBLocation(const QString &path)
+{
+    dblocation = path;
 }
 
 }

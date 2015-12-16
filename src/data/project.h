@@ -27,7 +27,12 @@ namespace analysisimporter {
 class Project
 {
 public:
+    Project();
     Project(QString name, QString url);
+
+    void setName(QString name);
+    void setUrl(QString url);
+    QString print();
 
 private:
     QString name;
