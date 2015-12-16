@@ -130,19 +130,21 @@ QSqlError DBManager::initDb(QSqlDatabase &db)
         return db.lastError();
     }
 
-    QQueue<QPair<QString, QString>> queue;
-    queue.enqueue(QPair<QString, QString>("projects", DB_CREATE_TABLE_PROJECTS));
-    queue.enqueue(QPair<QString, QString>("commits", DB_CREATE_TABLE_COMMITS));
-    queue.enqueue(QPair<QString, QString>("parentcommits", DB_CREATE_TABLE_PARENTCOMMITS));
-    queue.enqueue(QPair<QString, QString>("mergescenarios", DB_CREATE_TABLE_MERGESCENARIOS));
-    queue.enqueue(QPair<QString, QString>("files", DB_CREATE_TABLE_FILES));
-    queue.enqueue(QPair<QString, QString>("conflicts", DB_CREATE_TABLE_CONFLICTS));
+    typedef QPair<QString, QString> NewTable;
+
+    QQueue<NewTable> queue;
+    queue.enqueue(NewTable("projects", DB_CREATE_TABLE_PROJECTS));
+    queue.enqueue(NewTable("commits", DB_CREATE_TABLE_COMMITS));
+    queue.enqueue(NewTable("parentcommits", DB_CREATE_TABLE_PARENTCOMMITS));
+    queue.enqueue(NewTable("mergescenarios", DB_CREATE_TABLE_MERGESCENARIOS));
+    queue.enqueue(NewTable("files", DB_CREATE_TABLE_FILES));
+    queue.enqueue(NewTable("conflicts", DB_CREATE_TABLE_CONFLICTS));
 
     QStringList dbTables = db.tables();
     QSqlError error;
 
     while (!queue.isEmpty()) {
-        QPair<QString, QString> table = queue.dequeue();
+        NewTable table = queue.dequeue();
 
         error = checkTable(table.first, dbTables, table.second);
 
