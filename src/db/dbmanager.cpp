@@ -19,9 +19,13 @@
 
 
 #include "dbmanager.h"
+#include "dbschema.h"
 #include <QDebug>
+#include <QDir>
 
 namespace analysisimporter {
+
+const QString DB_FILE_NAME("/.analysis-importer.db");
 
 DBManager::DBManager()
 {
@@ -38,6 +42,29 @@ bool DBManager::connect()
 #ifdef QT_DEBUG
     qDebug() << "DBManager.connect()";
 #endif
+
+    if (db.isOpen()) {
+        return false;
+    }
+
+    db = QSqlDatabase::addDatabase("QSQLITE");
+    getDBLocation();
+
+#ifdef QT_DEBUG
+    qDebug() << "DB location is " << dblocation;
+#endif
+
+    db.setDatabaseName(dblocation);
+    QSqlError error = initDb(db);
+
+    if (error.type() != QSqlError::NoError) {
+#ifdef QT_DEBUG
+        qDebug() << error;
+#endif
+        return false;
+    }
+
+    return true;
 }
 
 bool DBManager::disconnect()
@@ -45,16 +72,66 @@ bool DBManager::disconnect()
 #ifdef QT_DEBUG
     qDebug() << "DBManager.disconnect()";
 #endif
+
+    if (!db.isOpen()) {
+        return false;
+    }
+
+    QString connection = db.connectionName();
+
+    db.close();
+    db = QSqlDatabase();
+    QSqlDatabase::removeDatabase(connection);
+    return true;
 }
 
 QString DBManager::getDBLocation()
 {
+    if (dblocation.isEmpty()) {
+        QString dbPath = DB_FILE_NAME;
+        dbPath.prepend(QDir::homePath());
+
+        // TODO: add option to use environment variable
+
+        dblocation = dbPath;
+    }
+
     return dblocation;
 }
 
 void DBManager::setDBLocation(const QString &path)
 {
     dblocation = path;
+}
+
+QSqlError DBManager::checkTable(const QString &table, const QStringList &tables, const QString &createStatement)
+{
+    if (!tables.contains(table, Qt::CaseInsensitive)) {
+        QSqlQuery query;
+
+        if (!query.exec(createStatement)) {
+            return query.lastError();
+        }
+    }
+
+    return QSqlError();
+}
+
+QSqlError DBManager::initDb(QSqlDatabase &db)
+{
+    if (!db.open()) {
+        return db.lastError();
+    }
+
+    QStringList tables = db.tables();
+    QSqlError error = checkTable("projects", tables, DB_CREATE_TABLE_PROJECTS);
+
+    if (error.type() != QSqlError::NoError) {
+        return error;
+    }
+
+    return QSqlError();
+
 }
 
 }

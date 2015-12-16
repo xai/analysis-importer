@@ -17,6 +17,9 @@
  * along with AnalysisImporter.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+#ifndef DBSCHEMA_H
+#define DBSCHEMA_H
+
 #include <QString>
 
 namespace analysisimporter {
@@ -259,3 +262,5 @@ const QString DB_DELETE_CONFLICT(
         "WHERE id = :id");
 
 }
+
+#endif // DBSCHEMA_H

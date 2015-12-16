@@ -19,6 +19,7 @@
 
 QT += core
 QT += xml
+QT += sql
 QT -= gui
 
 TARGET = analysis-importer
@@ -38,7 +39,6 @@ SOURCES += main.cpp \
     config.cpp \
     data/project.cpp \
     data/mergescenario.cpp \
-    db/dbschema.cpp \
     importer/xmltodbhandler.cpp \
     db/dbmanager.cpp
 
@@ -51,5 +51,6 @@ HEADERS += \
     data/project.h \
     data/mergescenario.h \
     importer/xmltodbhandler.h \
-    db/dbmanager.h
+    db/dbmanager.h \
+    db/dbschema.h
 

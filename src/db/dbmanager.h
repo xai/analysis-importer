@@ -22,6 +22,7 @@
 #define DBMANAGER_H
 
 #include <QString>
+#include <QtSql>
 
 namespace analysisimporter {
 
@@ -39,6 +40,10 @@ public:
 
 private:
     QString dblocation;
+    QSqlDatabase db;
+
+    QSqlError checkTable(const QString &table, const QStringList &tables, const QString &createStatement);
+    QSqlError initDb(QSqlDatabase &db);
 };
 
 }
