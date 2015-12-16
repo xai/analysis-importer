@@ -160,7 +160,7 @@ const QString DB_UPDATE_MERGESCENARIO(
         "UPDATE `mergescenarios` SET "
         "  `project`   = :project, "
         "  `commit`    = :commit "
-        "WHERE id = :id");
+        "WHERE `id` = :id");
 
 const QString DB_DELETE_MERGESCENARIO(
         "DELETE from mergescenario "
@@ -222,7 +222,7 @@ const QString DB_UPDATE_FILE(
         "UPDATE `parentcommits` SET "
         "  `commit` = :commit, "
         "  `path`   = :path "
-        "WHERE id = :id");
+        "WHERE `id` = :id");
 
 const QString DB_DELETE_FILE(
         "DELETE from `files` "
