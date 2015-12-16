@@ -107,6 +107,11 @@ void DBManager::setDBLocation(const QString &path)
 QSqlError DBManager::checkTable(const QString &table, const QStringList &tables, const QString &createStatement)
 {
     if (!tables.contains(table, Qt::CaseInsensitive)) {
+#ifdef QT_DEBUG
+        qDebug() << "Table " << table << " does not exist in database." << endl;
+        qDebug() << "Executing query: " << createStatement << endl;
+#endif
+
         QSqlQuery query;
 
         if (!query.exec(createStatement)) {
