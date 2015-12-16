@@ -110,6 +110,8 @@ QSqlError DBManager::checkTable(const QString &table, const QStringList &tables,
         QSqlQuery query;
 
         if (!query.exec(createStatement)) {
+            qWarning() << "An error occurred while executing the following query:" << endl;
+            qWarning() << createStatement << endl;
             return query.lastError();
         }
     }
@@ -123,11 +125,25 @@ QSqlError DBManager::initDb(QSqlDatabase &db)
         return db.lastError();
     }
 
-    QStringList tables = db.tables();
-    QSqlError error = checkTable("projects", tables, DB_CREATE_TABLE_PROJECTS);
+    QQueue<QPair<QString, QString>> queue;
+    queue.enqueue(QPair<QString, QString>("projects", DB_CREATE_TABLE_PROJECTS));
+    queue.enqueue(QPair<QString, QString>("revisions", DB_CREATE_TABLE_REVISIONS));
+    queue.enqueue(QPair<QString, QString>("parentrevisions", DB_CREATE_TABLE_PARENTREVISIONS));
+    queue.enqueue(QPair<QString, QString>("mergescenarios", DB_CREATE_TABLE_MERGESCENARIOS));
+    queue.enqueue(QPair<QString, QString>("files", DB_CREATE_TABLE_FILES));
+    queue.enqueue(QPair<QString, QString>("conflicts", DB_CREATE_TABLE_CONFLICTS));
 
-    if (error.type() != QSqlError::NoError) {
-        return error;
+    QStringList dbTables = db.tables();
+    QSqlError error;
+
+    while (!queue.isEmpty()) {
+        QPair<QString, QString> table = queue.dequeue();
+
+        error = checkTable(table.first, dbTables, table.second);
+
+        if (error.type() != QSqlError::NoError) {
+            return error;
+        }
     }
 
     return QSqlError();
